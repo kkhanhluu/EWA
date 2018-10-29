@@ -1,0 +1,66 @@
+h2 {
+    text-align: center;
+}
+html, body, section {
+    height: 100%;
+    background-color: bisque;
+}
+#pizzen {
+    height: 100%;
+}
+#left-side-div {
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+.pizza {
+    width: 100%; 
+    margin-top: 5px; 
+    margin-bottom: 5px; 
+    border: 1px solid;
+    display: flex; 
+    align-items: center;
+}
+.pizzaText {
+    color: red;
+    display:inline-block; 
+}
+.div-pizza-image {
+    height: 20%; 
+    width: 50%;
+}
+.pizzaImage {
+    height: 100%; 
+    width: 50%;
+}
+
+/** right side div **/ 
+#right-side-div {
+    width: 50%; 
+    float: right;
+    height: 100%; 
+}
+#div-cart {
+    height: 40%; 
+}
+#cart {
+    border: solid 1px; 
+    background-color: beige; 
+}
+#div-customer {
+    height: 50%;
+}
+#totalPrice {
+    height: 10%;
+}
+#customer {
+    
+}
+.buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+.form-input {
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
