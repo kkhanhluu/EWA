@@ -1,9 +1,21 @@
 h2 {
     text-align: center;
 }
-html, body, section {
-    height: 100%;
-    background-color: bisque;
+html, body {
+    height: 100%; 
+}
+body {
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    background-size: cover; 
+    display: flex; 
+    align-items: center;
+}
+section {
+    overflow: auto;
+    background-color: antiquewhite;
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px;
 }
 #pizzen {
     height: 100%;
@@ -31,7 +43,7 @@ html, body, section {
 }
 .pizzaImage {
     height: 100%; 
-    width: 50%;
+    width: 70%;
 }
 
 /** right side div **/ 

@@ -1,40 +1,49 @@
 <!doctype html> 
-<html>
+<html lang="de">
 <head>
     <meta charset="UTF-8"> 
     <link rel="stylesheet" href="styles//BaeckerStyle.css" /> 
     <title>Bäcker</title>
 </head>
 <body>
-    <secton>
+    <section>
         <h2>Bäcker</h2>
         <hr />
         <div class="div-pizza-order">
-            <div class="div-status-order">
+            <form class="form-status-order" id="form1" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <fieldset>
-                    <legend>Bestellung 90: Pizza Margherita</legend>
-                    <label><input type="radio" name="order-status1">Bestellt</label>
-                    <label><input type="radio" name="order-status1">Im Ofen</label>
-                    <label><input checked="checked" type="radio" name="order-status1">Fertig</label>
+                    <legend>Pizza Hawaii</legend>
+                    <label>
+                        <input type="radio" onclick="document.forms['form1']. submit();" name="order-status1" value="bestellt">Bestellt</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form1']. submit();" name="order-status1" value="Im-ofen">Im Ofen</label>
+                    <label>
+                        <input checked="checked" onclick="document.forms['form1']. submit();" type="radio" name="order-status1" value="fertig">Fertig</label>
                 </fieldset>
-            </div>
-            <div class="div-status-order">
+            </form>
+            <form class="form-status-order" id="form2" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <fieldset>
-                    <legend>Bestellung 91: Pizza Salami</legend>
-                    <label><input checked="checked" type="radio" name="order-status2">Bestellt</label>
-                    <label><input type="radio" name="order-status2">Im Ofen</label>
-                    <label><input type="radio" name="order-status2">Fertig</label>
+                    <legend>Pizza Salami</legend>
+                    <label>
+                        <input type="radio" onclick="document.forms['form2']. submit();" name="order-status2" value="bestellt">Bestellt</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form2']. submit();" name="order-status2" value="Im-ofen">Im Ofen</label>
+                    <label>
+                        <input checked="checked" onclick="document.forms['form2']. submit();" type="radio" name="order-status2" value="fertig">Fertig</label>
                 </fieldset>
-            </div>
-            <div class="div-status-order">
+            </form>
+            <form class="form-status-order" id="form3" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <fieldset>
-                    <legend>Bestellung 92: Pizza Hawaii</legend>
-                    <label><input type="radio" name="order-status3">Bestellt</label>
-                    <label><input checked="checked" type="radio" name="order-status3">Im Ofen</label>
-                    <label><input type="radio" name="order-status3">Fertig</label>
+                    <legend>Piza Schinken</legend>
+                    <label>
+                        <input type="radio" onclick="document.forms['form3']. submit();" name="order-status3" value="bestellt">Bestellt</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form3']. submit();" name="order-status3" value="Im-ofen">Im Ofen</label>
+                    <label>
+                        <input checked="checked" onclick="document.forms['form3']. submit();" type="radio" name="order-status3" value="fertig">Fertig</label>
                 </fieldset>
-            </div>
+            </form>
         </div>
-    </secton>
+    </section>
 </body>
 </html>

@@ -1,53 +1,70 @@
 <!doctype html>
-<html>
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <title>Kunde</title>
-    <link rel="stylesheet" href="styles/KundeStyle.css" />
+    <link rel="stylesheet" href="styles/KundeStyle.css">
 </head>
 
 <body>
     <section>
         <h2>Kunde</h2>
-        <hr />
+        <hr>
         <div class="div-pizza">
-            <div class="customer-input">
+            <form class="customer-input" id="form1" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <fieldset>
                     <legend>Kunde</legend>
-                    <label><input type="radio" name="order-status1">Bestellt</label>
-                    <label><input type="radio" name="order-status1">Im Ofen</label>
-                    <label><input checked="checked" type="radio" name="order-status1">Fertig</label>
-                    <label><input type="radio" name="order-status1">Unterwegs</label>
-                    <label><input type="radio" name="order-status1">Geliefert</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form1']. submit();" name="order-status1" value="bestellt">Bestellt</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form1']. submit();" name="order-status1" value="Im-ofen">Im Ofen</label>
+                    <label>
+                        <input checked="checked" onclick="document.forms['form1']. submit();" type="radio" name="order-status1" value="fertig">Fertig</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form1']. submit();" name="order-status1" value="unterwegs">Unterwegs</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form1']. submit();" name="order-status1" value="geliefert">Geliefert</label>
                 </fieldset>
-            </div>
+            </form>
         </div>
         <div class="div-pizza">
-            <div class="customer-input">
+            <form class="customer-input" id="form2" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <fieldset>
                     <legend>Kunde</legend>
-                    <label><input checked="checked" type="radio" name="order-status2">Bestellt</label>
-                    <label><input type="radio" name="order-status2">Im Ofen</label>
-                    <label><input type="radio" name="order-status2">Fertig</label>
-                    <label><input type="radio" name="order-status2">Unterwegs</label>
-                    <label><input type="radio" name="order-status2">Geliefert</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form2']. submit();" name="order-status2" value="bestellt">Bestellt</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form2']. submit();" name="order-status2" value="Im-ofen">Im Ofen</label>
+                    <label>
+                        <input checked="checked" onclick="document.forms['form2']. submit();" type="radio" name="order-status2" value="fertig">Fertig</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form2']. submit();" name="order-status2" value="unterwegs">Unterwegs</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form2']. submit();" name="order-status2" value="geliefert">Geliefert</label>
                 </fieldset>
-            </div>
+            </form>
         </div>
         <div class="div-pizza">
-            <div class="customer-input">
+            <form class="customer-input" id="form3" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <fieldset>
                     <legend>Kunde</legend>
-                    <label><input type="radio" name="order-status3">Bestellt</label>
-                    <label><input checked="checked" type="radio" name="order-status3">Im Ofen</label>
-                    <label><input type="radio" name="order-status3">Fertig</label>
-                    <label><input type="radio" name="order-status3">Unterwegs</label>
-                    <label><input type="radio" name="order-status3">Geliefert</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form3']. submit();" name="order-status3" value="bestellt">Bestellt</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form3']. submit();" name="order-status3" value="Im-ofen">Im Ofen</label>
+                    <label>
+                        <input checked="checked" onclick="document.forms['form3']. submit();" type="radio" name="order-status3" value="fertig">Fertig</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form3']. submit();" name="order-status3" value="unterwegs">Unterwegs</label>
+                    <label>
+                        <input type="radio" onclick="document.forms['form3']. submit();" name="order-status3" value="geliefert">Geliefert</label>
                 </fieldset>
-            </div>
+            </form>
         </div>
     </section>
+
+
 </body>
 
 </html>
