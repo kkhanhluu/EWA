@@ -1,26 +1,45 @@
-<!doctype html> 
+<!doctype html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8"> 
-    <link rel="stylesheet" href="styles/Fahrer.css" /> 
-    <title>Bäcker</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/Fahrer.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <title>Fahrer</title>
 </head>
+
 <body>
+    <ul class="topnav">
+        <li>
+            <a href="Uebersicht.html">Übersicht</a>
+        </li>
+        <li>
+            <a href="Bestellung.html">Bestellung</a>
+        </li>
+        <li>
+            <a href="Kunde.html">Kunde</a>
+        </li>
+        <li>
+            <a href="Baecker.html">Bäcker</a>
+        </li>
+        <li>
+            <a href="Fahrer.html">Fahrer</a>
+        </li>
+    </ul>
     <section>
-        <h2>Bäcker</h2>
+        <h2>Fahrer</h2>
         <hr />
         <div class="div-driver">
             <form class="form-status-driver" id="form1" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <fieldset>
                     <legend>Bestellung 91</legend>
-                    <select name="status" size="1">
-                        <option onclick="document.forms['form1'].submit(); " selected value="fertig">Fertig</option>
-                        <option onclick="document.forms['form1'].submit(); " value="unterwegs">Unterwegs</option>
-                        <option onclick="document.forms['form1'].submit(); " value="geliefert">Geliefert</option>
-                    </select>
+                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="fertig">Fertig</input>
+                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="unterwegs">Unterwegs</input>
+                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="geliefert">Geliefert</input  >
                 </fieldset>
             </form>
         </div>
     </section>
 </body>
+
 </html>

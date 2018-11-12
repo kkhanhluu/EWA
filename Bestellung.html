@@ -1,15 +1,26 @@
 <!doctype html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <title>Bestellung</title>
     <link rel="stylesheet" href="styles/BestellungStyle.css" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/index.css" />
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- scripts -->
+    <script type="text/javascript" src="scripts/bestellung.js"></script>
 </head>
 
 <body>
+    <ul class="topnav">
+        <li><a href="Uebersicht.html">Übersicht</a></li>
+        <li><a href="Bestellung.html">Bestellung</a></li>
+        <li><a href="Kunde.html">Kunde</a></li>
+        <li><a href="Baecker.html">Bäcker</a></li>
+        <li><a href="Fahrer.html">Fahrer</a></li>
+    </ul>
     <section>
         <h2>Bestellung</h2>
         <hr />
@@ -18,26 +29,26 @@
             <div id="pizzen">
                 <div class="pizza">
                     <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza1.jpg" alt="Pizza Margherita">
+                        <img class="pizzaImage" src="images/pizza1.jpg" alt="Pizza Margherita" data-price="4" data-pizza="Pizza Margherita">
                     </div>
                     <p class="pizzaText">Pizza Margherita - 4€</p>
                 </div>
                 <div class="pizza">
                     <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza2.jpg" alt="Pizza Salami">
+                        <img class="pizzaImage" src="images/pizza2.jpg" alt="Pizza Salami" data-price="4.5" data-pizza="Pizza Salami">
                     </div>
                     <p class="pizzaText">Pizza Salmi - 4.5€</p>
 
                 </div>
                 <div class="pizza">
                     <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza3.png" alt="Pizza Hawaii">
+                        <img class="pizzaImage" src="images/pizza3.png" alt="Pizza Hawaii" data-price="4.5" data-pizza="Pizza Hawaii">
                     </div>
                     <p class="pizzaText">Pizza Hawaii - 4.5€</p>
                 </div>
                 <div class="pizza">
                     <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza4.jpg" alt="Pizza Casanova">
+                        <img class="pizzaImage" src="images/pizza4.jpg" alt="Pizza Casanova" data-price="5.5" data-pizza="Pizza Casanova">
                     </div>
                     <p class="pizzaText">Pizza Casanova - 5.5€</p>
                 </div>
@@ -48,42 +59,29 @@
             <div id="div-cart">
                 <h4>Ihr Warenkorb</h4>
                 <div id="cart">
-                    <p>1x Pizza Salami</p>
-                    <p>2x Pizza Margherita</p>
                 </div>
                 <div class="buttons">
-                    <button id="pizzaDelete">Eine Pizza entfernen</button>
-                    <button id="emtypCart">Warenkorb leeren</button>
+                    <button class="button" id="pizzaDelete">Eine Pizza entfernen</button>
+                    <button class="button" id="emptyCart">Warenkorb leeren</button>
                 </div>
             </div>
             <div id="totalPrice">
-                <p>Preis 12.5€</p>
+                <p>Preis <span id="total-price">0</span>€</p>
             </div>
             <form id="div-customer" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
                 <h4>Ihre Daten</h4>
                 <div id="customer">
-                    <div class="form-input">
-                        <input type="text" name="name" value="Johannes" />
+                    <input class="form-input" type="text" name="name"  placeholder="Name"/>
+                    <input class="form-input" type="text" name="adresse" placeholder="Straße" required/>
+                    <input class="form-input" type="text" name="Hausnummer" placeholder="Hausnummer" required/>
+                    <input class="form-input" type="text" name="PLZ" placeholder="PLZ" required/>
+                    <input class="form-input" type="text" name="Stadt" placeholder="Stadt" required/>
+                    <div class="buttons">
+                        <button disabled class="button" id="send" type="submit">Senden</button>
+                        <button class="button" id="input-delete" type="button">Eingaben Löschen</button>
                     </div>
-                    <div class="form-input">
-                        <input type="text" name="adresse" value="Inselstrasse" />
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="Hausnummer" value="100"/>
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="PLZ" value="64287" />
-                    </div>
-                    <div class="form-input">
-                        <input type="text" name="Stadt" value="Darmstadt"/>
-                    </div>
-                </div>
-                <div class="buttons">
-                    <button type="submit">Senden</button>
-                    <button>Eingaben Löschen</button>
-                </div>
             </form>
-        </div>
+            </div>
     </section>
 </body>
 

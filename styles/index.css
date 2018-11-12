@@ -1,0 +1,53 @@
+html, body {
+    height: 100%; 
+    font-family: 'Gloria Hallelujah', cursive, sans-serif;
+}
+body {
+    background: url(../images/background1.jpg) no-repeat center center fixed;
+    background-size: cover; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+/* navbar */
+ul.topnav {
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+    overflow: hidden;
+    min-height: 4em;
+}
+ul.topnav li {
+    float: left;
+}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+section {
+    background-color: antiquewhite;
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px;
+}
+@media screen and (max-width: 600px) {
+    body {
+        height: 109%;
+    }
+    ul.topnav {
+        width: 100%;
+        height: 55% !important;
+    }
+    ul.topnav li {
+        float: none; 
+    }
+    section {
+        display: flex; 
+        flex-direction: column;
+        height: 100%; 
+    }
+}
