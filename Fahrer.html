@@ -10,37 +10,41 @@
 </head>
 
 <body>
-    <ul class="topnav">
-        <li>
-            <a href="Uebersicht.html">Übersicht</a>
-        </li>
-        <li>
-            <a href="Bestellung.html">Bestellung</a>
-        </li>
-        <li>
-            <a href="Kunde.html">Kunde</a>
-        </li>
-        <li>
-            <a href="Baecker.html">Bäcker</a>
-        </li>
-        <li>
-            <a href="Fahrer.html">Fahrer</a>
-        </li>
-    </ul>
-    <section>
-        <h2>Fahrer</h2>
-        <hr />
-        <div class="div-driver">
-            <form class="form-status-driver" id="form1" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
-                <fieldset>
-                    <legend>Bestellung 91</legend>
-                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="fertig">Fertig</input>
-                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="unterwegs">Unterwegs</input>
-                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="geliefert">Geliefert</input  >
-                </fieldset>
-            </form>
-        </div>
-    </section>
+    <div class="container">
+        <ul class="topnav">
+            <li>
+                <a href="Uebersicht.html">Übersicht</a>
+            </li>
+            <li>
+                <a href="Bestellung.html">Bestellung</a>
+            </li>
+            <li>
+                <a href="Kunde.html">Kunde</a>
+            </li>
+            <li>
+                <a href="Baecker.html">Bäcker</a>
+            </li>
+            <li>
+                <a href="Fahrer.html">Fahrer</a>
+            </li>
+        </ul>
+        <section>
+            <h2>Fahrer</h2>
+            <hr />
+            <div class="div-driver">
+                <form class="form-status-driver" id="form1" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
+                    <fieldset>
+                        <legend>Bestellung 91</legend>
+                        <div class="div-input">
+                            <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="fertig">Fertig</input>
+                            <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="unterwegs">Unterwegs</input>
+                            <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="geliefert">Geliefert</input>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </div>
 </body>
 
 </html>

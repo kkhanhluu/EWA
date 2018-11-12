@@ -14,75 +14,88 @@
 </head>
 
 <body>
-    <ul class="topnav">
-        <li><a href="Uebersicht.html">Übersicht</a></li>
-        <li><a href="Bestellung.html">Bestellung</a></li>
-        <li><a href="Kunde.html">Kunde</a></li>
-        <li><a href="Baecker.html">Bäcker</a></li>
-        <li><a href="Fahrer.html">Fahrer</a></li>
-    </ul>
-    <section>
-        <h2>Bestellung</h2>
-        <hr />
-        <div id="left-side-div">
-            <h4>Bitte wählen Sie Ihre Bestellung</h4>
-            <div id="pizzen">
-                <div class="pizza">
-                    <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza1.jpg" alt="Pizza Margherita" data-price="4" data-pizza="Pizza Margherita">
+    <div class="container">
+        <ul class="topnav">
+            <li>
+                <a href="Uebersicht.html">Übersicht</a>
+            </li>
+            <li>
+                <a href="Bestellung.html">Bestellung</a>
+            </li>
+            <li>
+                <a href="Kunde.html">Kunde</a>
+            </li>
+            <li>
+                <a href="Baecker.html">Bäcker</a>
+            </li>
+            <li>
+                <a href="Fahrer.html">Fahrer</a>
+            </li>
+        </ul>
+        <section>
+            <h2>Bestellung</h2>
+            <hr />
+            <div id="left-side-div">
+                <h4>Bitte wählen Sie Ihre Bestellung</h4>
+                <div id="pizzen">
+                    <div class="pizza">
+                        <div class="div-pizza-image">
+                            <img class="pizzaImage" src="images/pizza1.jpg" alt="Pizza Margherita" data-price="4" data-pizza="Pizza Margherita">
+                        </div>
+                        <p class="pizzaText">Pizza Margherita - 4€</p>
                     </div>
-                    <p class="pizzaText">Pizza Margherita - 4€</p>
-                </div>
-                <div class="pizza">
-                    <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza2.jpg" alt="Pizza Salami" data-price="4.5" data-pizza="Pizza Salami">
-                    </div>
-                    <p class="pizzaText">Pizza Salmi - 4.5€</p>
+                    <div class="pizza">
+                        <div class="div-pizza-image">
+                            <img class="pizzaImage" src="images/pizza2.jpg" alt="Pizza Salami" data-price="4.5" data-pizza="Pizza Salami">
+                        </div>
+                        <p class="pizzaText">Pizza Salmi - 4.5€</p>
 
-                </div>
-                <div class="pizza">
-                    <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza3.png" alt="Pizza Hawaii" data-price="4.5" data-pizza="Pizza Hawaii">
                     </div>
-                    <p class="pizzaText">Pizza Hawaii - 4.5€</p>
-                </div>
-                <div class="pizza">
-                    <div class="div-pizza-image">
-                        <img class="pizzaImage" src="images/pizza4.jpg" alt="Pizza Casanova" data-price="5.5" data-pizza="Pizza Casanova">
+                    <div class="pizza">
+                        <div class="div-pizza-image">
+                            <img class="pizzaImage" src="images/pizza3.png" alt="Pizza Hawaii" data-price="4.5" data-pizza="Pizza Hawaii">
+                        </div>
+                        <p class="pizzaText">Pizza Hawaii - 4.5€</p>
                     </div>
-                    <p class="pizzaText">Pizza Casanova - 5.5€</p>
+                    <div class="pizza">
+                        <div class="div-pizza-image">
+                            <img class="pizzaImage" src="images/pizza4.jpg" alt="Pizza Casanova" data-price="5.5" data-pizza="Pizza Casanova">
+                        </div>
+                        <p class="pizzaText">Pizza Casanova - 5.5€</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="right-side-div">
-            <div id="div-cart">
-                <h4>Ihr Warenkorb</h4>
-                <div id="cart">
-                </div>
-                <div class="buttons">
-                    <button class="button" id="pizzaDelete">Eine Pizza entfernen</button>
-                    <button class="button" id="emptyCart">Warenkorb leeren</button>
-                </div>
-            </div>
-            <div id="totalPrice">
-                <p>Preis <span id="total-price">0</span>€</p>
-            </div>
-            <form id="div-customer" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
-                <h4>Ihre Daten</h4>
-                <div id="customer">
-                    <input class="form-input" type="text" name="name"  placeholder="Name"/>
-                    <input class="form-input" type="text" name="adresse" placeholder="Straße" required/>
-                    <input class="form-input" type="text" name="Hausnummer" placeholder="Hausnummer" required/>
-                    <input class="form-input" type="text" name="PLZ" placeholder="PLZ" required/>
-                    <input class="form-input" type="text" name="Stadt" placeholder="Stadt" required/>
+            <div id="right-side-div">
+                <div id="div-cart">
+                    <h4>Ihr Warenkorb</h4>
+                    <div id="cart">
+                    </div>
                     <div class="buttons">
-                        <button disabled class="button" id="send" type="submit">Senden</button>
-                        <button class="button" id="input-delete" type="button">Eingaben Löschen</button>
+                        <button class="button" id="pizzaDelete">Eine Pizza entfernen</button>
+                        <button class="button" id="emptyCart">Warenkorb leeren</button>
                     </div>
-            </form>
-            </div>
-    </section>
+                </div>
+                <div id="totalPrice">
+                    <p>Preis
+                        <span id="total-price">0</span>€</p>
+                </div>
+                <form id="div-customer" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
+                    <h4>Ihre Daten</h4>
+                    <div id="customer">
+                        <input class="form-input" type="text" name="name" placeholder="Name" />
+                        <input class="form-input" type="text" name="adresse" placeholder="Straße" required/>
+                        <input class="form-input" type="text" name="Hausnummer" placeholder="Hausnummer" required/>
+                        <input class="form-input" type="text" name="PLZ" placeholder="PLZ" required/>
+                        <input class="form-input" type="text" name="Stadt" placeholder="Stadt" required/>
+                        <div class="buttons">
+                            <button disabled class="button" id="send" type="submit">Senden</button>
+                            <button class="button" id="input-delete" type="button">Eingaben Löschen</button>
+                        </div>
+                </form>
+                </div>
+        </section>
+    </div>
 </body>
 
 </html>
