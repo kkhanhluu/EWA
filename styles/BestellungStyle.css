@@ -8,7 +8,6 @@ h2 {
 }
 #left-side-div {
     width: 40%;
-    height: 100%;
     float: left;
 }
 .pizza {
@@ -88,18 +87,18 @@ h2 {
         flex-direction: column; 
     }
     #pizzen {
-        height: 80% !important;
+        height: 100%;
     }
     #left-side-div {
         width: 100%;
         margin-top: -50px;
+        background-color: antiquewhite;
     }
 
     #right-side-div {
         width: 100%;
         height: 100%; 
         background-color: antiquewhite;
-        min-height: 100%;
     }
     
     #div-customer {
