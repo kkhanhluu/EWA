@@ -113,15 +113,12 @@ function eventListenerForSelected(event) {
 
 function eventListenerForButtonEmptyCart(event) {
     "use strict";
-    let totalPrice = parseFloat(document.getElementById('total-price').innerHTML);
-
     let deletedPizza = document.getElementsByClassName('pizza-in-cart');
     while (deletedPizza.length > 0) {
-        totalPrice -= parseFloat(deletedPizza[0].getAttribute('data-price'));
         deletedPizza[0].parentNode.removeChild(deletedPizza[0]);
     }
 
-    document.getElementById('total-price').innerHTML = totalPrice;
+    document.getElementById('total-price').innerHTML = 0;
 }
 
 function eventListenerForEmptyInput(event) {

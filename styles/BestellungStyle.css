@@ -9,6 +9,7 @@ h2 {
 #left-side-div {
     width: 40%;
     float: left;
+    padding-left: 10px;
 }
 .pizza {
     width: 100%; 
@@ -39,13 +40,15 @@ h2 {
     width: 50%; 
     float: right;
     height: 100%; 
+    padding-right: 10px; 
 }
 #div-cart {
     height: 40%; 
 }
 #cart {
     border: solid 1px; 
-    background-color: beige; 
+    background-color: beige;
+    padding-left: 10px; 
 }
 #div-customer {
     height: 50%;
@@ -88,24 +91,38 @@ h2 {
     }
     #pizzen {
         height: 100%;
+        width: 97%; 
     }
     #left-side-div {
-        width: 100%;
+        width: 97%;
         margin-top: -50px;
         background-color: antiquewhite;
     }
 
     #right-side-div {
-        width: 100%;
-        height: 100%; 
+        width: 95%;
+        height: auto; 
         background-color: antiquewhite;
+        margin-top: 20px;
+        padding: 10px;
     }
     
     #div-customer {
         background-color: antiquewhite;
         height: auto !important;
+        width: 103%; 
+    }
+
+    #totalPrice {
+        background-color: antiquewhite;
+    }
+    #div-cart {
+        height: auto; 
+        display: flex;
+        flex-direction: column;
     }
     .buttons {
         display: flex; 
+        align-items: center;
     }
 }
