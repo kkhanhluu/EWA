@@ -79,6 +79,26 @@ class Bestellung extends Page
         // to do: fetch data for this view from the database
     }
     
+    protected function generatePageHeader($headline = "Bestellung") 
+    {
+        $headline = htmlspecialchars($headline);
+        header("Content-type: text/html; charset=UTF-8");
+        // to do: call generateView() for all members
+        echo <<<EOF
+        <head>
+            <meta charset="UTF-8">
+            <title>Bestellung</title>
+            <link rel="stylesheet" href="styles/BestellungStyle.css" />
+            <link rel="stylesheet" href="styles/index.css" />
+            <!-- Google fonts -->
+            <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- scripts -->
+            <script type="text/javascript" src="scripts/bestellung.js"></script>
+        </head>
+EOF;
+    }
+
     /**
      * First the necessary data is fetched and then the HTML is 
      * assembled for output. i.e. the header is generated, the content
@@ -93,8 +113,35 @@ class Bestellung extends Page
         $this->getViewData();
         $this->generatePageHeader('Bestellung');
 
-        $this->_menu->generateView('pizzen');
+        echo <<<EOF
+        <div class="container">
+        <ul class="topnav">
+            <li>
+                <a href="Uebersicht.php">Übersicht</a>
+            </li>
+            <li>
+                <a href="Bestellung.php">Bestellung</a>
+            </li>
+            <li>
+                <a href="Kunde.php">Kunde</a>
+            </li>
+            <li>
+                <a href="Baecker.php">Bäcker</a>
+            </li>
+            <li>
+                <a href="Fahrer.php">Fahrer</a>
+            </li>
+        </ul>
+        <section>
+            <h2>Bestellung</h2>
+            <hr />
+EOF;
+        $this->_menu->generateView('left-side-div');
         $this->_rightDiv->generateView('right-side-div');
+        echo <<<EOF
+        </section>
+    </div>
+EOF;
         $this->generatePageFooter();
     }
     

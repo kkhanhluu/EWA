@@ -76,6 +76,21 @@ class Kunde extends Page
         // to do: fetch data for this view from the database
     }
     
+    protected function generatePageHeader($headline = "Bestellung") 
+    {
+        $headline = htmlspecialchars($headline);
+        header("Content-type: text/html; charset=UTF-8");
+        // to do: call generateView() for all members
+        echo <<<EOF
+        <head>
+            <meta charset="UTF-8">
+            <title>Kunde</title>
+            <link rel="stylesheet" href="styles/KundeStyle.css">
+            <link rel="stylesheet" href="styles/index.css" />
+        </head>
+EOF;
+    }
+    
     /**
      * First the necessary data is fetched and then the HTML is 
      * assembled for output. i.e. the header is generated, the content
@@ -90,7 +105,36 @@ class Kunde extends Page
         $this->getViewData();
         $this->generatePageHeader('Kunde');
 
+        echo<<<EOF
+        <div class="container">
+        <ul class="topnav">
+            <li>
+                <a href="Uebersicht.html">Übersicht</a>
+            </li>
+            <li>
+                <a href="Bestellung.html">Bestellung</a>
+            </li>
+            <li>
+                <a href="Kunde.html">Kunde</a>
+            </li>
+            <li>
+                <a href="Baecker.html">Bäcker</a>
+            </li>
+            <li>
+                <a href="Fahrer.html">Fahrer</a>
+            </li>
+        </ul>
+        <section>
+            <h2>Kunde</h2>
+            <hr>
+EOF;
+
         $this->_kundeform->generateView('kunde-form');
+
+        echo <<<EOF
+        </section>
+        </div>
+EOF;
         $this->generatePageFooter();
     }
     

@@ -76,7 +76,7 @@ class Menu          // to do: change name of class
      *
      * @return none
      */
-    public function generateView($id = "pizzen") 
+    public function generateView($id = "left-side-div") 
     {
         $this->getViewData();
         if ($id) {
@@ -86,30 +86,33 @@ class Menu          // to do: change name of class
         // to do: call generateView() for all members
         echo <<<EOF
         
-        <div class="pizza">
-            <div class="div-pizza-image">
-                <img class="pizzaImage" src="images/pizza1.jpg" alt="Pizza Margherita" data-price="4" data-pizza="Pizza Margherita">
+        <h4>Bitte wählen Sie Ihre Bestellung</h4>
+        <div id="pizzen">
+            <div class="pizza">
+                <div class="div-pizza-image">
+                    <img class="pizzaImage" src="images/pizza1.jpg" alt="Pizza Margherita" data-price="4" data-pizza="Pizza Margherita">
+                </div>
+                <p class="pizzaText">Pizza Margherita - 4€</p>
             </div>
-            <p class="pizzaText">Pizza Margherita - 4€</p>
-        </div>
-        <div class="pizza">
-            <div class="div-pizza-image">
-                <img class="pizzaImage" src="images/pizza2.jpg" alt="Pizza Salami" data-price="4.5" data-pizza="Pizza Salami">
-            </div>
-            <p class="pizzaText">Pizza Salmi - 4.5€</p>
+            <div class="pizza">
+                <div class="div-pizza-image">
+                    <img class="pizzaImage" src="images/pizza2.jpg" alt="Pizza Salami" data-price="4.5" data-pizza="Pizza Salami">
+                </div>
+                <p class="pizzaText">Pizza Salmi - 4.5€</p>
 
-        </div>
-        <div class="pizza">
-            <div class="div-pizza-image">
-                <img class="pizzaImage" src="images/pizza3.png" alt="Pizza Hawaii" data-price="4.5" data-pizza="Pizza Hawaii">
             </div>
-            <p class="pizzaText">Pizza Hawaii - 4.5€</p>
-        </div>
-        <div class="pizza">
-            <div class="div-pizza-image">
-                <img class="pizzaImage" src="images/pizza4.jpg" alt="Pizza Casanova" data-price="5.5" data-pizza="Pizza Casanova">
+            <div class="pizza">
+                <div class="div-pizza-image">
+                    <img class="pizzaImage" src="images/pizza3.png" alt="Pizza Hawaii" data-price="4.5" data-pizza="Pizza Hawaii">
+                </div>
+                <p class="pizzaText">Pizza Hawaii - 4.5€</p>
             </div>
-            <p class="pizzaText">Pizza Casanova - 5.5€</p>
+            <div class="pizza">
+                <div class="div-pizza-image">
+                    <img class="pizzaImage" src="images/pizza4.jpg" alt="Pizza Casanova" data-price="5.5" data-pizza="Pizza Casanova">
+                </div>
+                <p class="pizzaText">Pizza Casanova - 5.5€</p>
+            </div>
         </div>
 EOF;
         echo "</div>\n";

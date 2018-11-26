@@ -96,7 +96,9 @@ class RightDiv          // to do: change name of class
             </div>
         </div>
         <div id="totalPrice">
-            <p>Preis<span id="total-price">0</span>€</p>
+            <p>Preis
+                <span id="total-price">0</span>
+            €</p>
         </div>
         <form id="div-customer" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
             <h4>Ihre Daten</h4>
