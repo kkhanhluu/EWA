@@ -100,11 +100,11 @@ class RightDiv          // to do: change name of class
                 <span id="total-price">0</span>
             €</p>
         </div>
-        <form id="div-customer" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
+        <form id="div-customer" action="Bestellung.php" accept-charset="UTF-8" method="POST">
             <h4>Ihre Daten</h4>
             <div id="customer">
                 <input class="form-input" type="text" name="name" placeholder="Name" />
-                <input class="form-input" type="text" name="adresse" placeholder="Straße" required/>
+                <input class="form-input" type="text" name="strasse" placeholder="Straße" required/>
                 <input class="form-input" type="text" name="Hausnummer" placeholder="Hausnummer" required/>
                 <input class="form-input" type="text" name="PLZ" placeholder="PLZ" required/>
                 <input class="form-input" type="text" name="Stadt" placeholder="Stadt" required/>

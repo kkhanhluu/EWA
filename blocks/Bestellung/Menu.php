@@ -65,8 +65,28 @@ class Menu          // to do: change name of class
     protected function getViewData()
     {
         // to do: fetch data for this view from the database
+        $sql = "SELECT * FROM angebot"; 
+        $recordSet = $this->_database->query($sql); 
+
+        if(!$recordSet) {
+            throw new Exception("Abfrage fehlgeschlagen: ".$this->_database->error); 
+        }
+
+        // read selected records into array
+        $pizza = array(); 
+        $record = $recordSet->fetch_assoc(); 
+        while ($record) {
+            $pizza[] = $record;
+            $record = $recordSet->fetch_assoc(); 
+        }
+        $recordSet->free(); 
+        return $pizza; 
     }
     
+    private function insertPizza($sourceImage, $price, $name) {
+        $format = '<div class="pizza"><div class="div-pizza-image"><img class="pizzaImage" src="%s" alt="%s" data-price="%g" data-pizza="%s"></div><p class="pizzaText">%s - %g€</p></div>';
+        echo sprintf($format, $sourceImage, $name, $price, $name, $name, $price); 
+    }
     /**
      * Generates an HTML block embraced by a div-tag with the submitted id.
      * If the block contains other blocks, delegate the generation of their 
@@ -78,44 +98,22 @@ class Menu          // to do: change name of class
      */
     public function generateView($id = "left-side-div") 
     {
-        $this->getViewData();
+        $pizzas = $this->getViewData();
         if ($id) {
             $id = "id=\"$id\"";
         }
         echo "<div $id>\n";
         // to do: call generateView() for all members
-        echo <<<EOF
+        echo <<<EOT
         
         <h4>Bitte wählen Sie Ihre Bestellung</h4>
         <div id="pizzen">
-            <div class="pizza">
-                <div class="div-pizza-image">
-                    <img class="pizzaImage" src="images/pizza1.jpg" alt="Pizza Margherita" data-price="4" data-pizza="Pizza Margherita">
-                </div>
-                <p class="pizzaText">Pizza Margherita - 4€</p>
-            </div>
-            <div class="pizza">
-                <div class="div-pizza-image">
-                    <img class="pizzaImage" src="images/pizza2.jpg" alt="Pizza Salami" data-price="4.5" data-pizza="Pizza Salami">
-                </div>
-                <p class="pizzaText">Pizza Salmi - 4.5€</p>
-
-            </div>
-            <div class="pizza">
-                <div class="div-pizza-image">
-                    <img class="pizzaImage" src="images/pizza3.png" alt="Pizza Hawaii" data-price="4.5" data-pizza="Pizza Hawaii">
-                </div>
-                <p class="pizzaText">Pizza Hawaii - 4.5€</p>
-            </div>
-            <div class="pizza">
-                <div class="div-pizza-image">
-                    <img class="pizzaImage" src="images/pizza4.jpg" alt="Pizza Casanova" data-price="5.5" data-pizza="Pizza Casanova">
-                </div>
-                <p class="pizzaText">Pizza Casanova - 5.5€</p>
-            </div>
-        </div>
-EOF;
-        echo "</div>\n";
+EOT;
+            foreach($pizzas as $pizza) {
+                // var_dump($pizza);
+                $this->insertPizza($pizza["Bilddatei"], $pizza["Preis"], $pizza["PizzaName"]);
+            }
+        echo "</div></div>\n";
     }
     
     /**

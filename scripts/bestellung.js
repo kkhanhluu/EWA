@@ -60,11 +60,20 @@ function eventListenerForPizzaImage(event) {
             break; 
     }
 
+    // update input 
+    let $pizzaInput = document.getElementById("customer"); 
+    let newPizzaInput = document.createElement("input"); 
+    newPizzaInput.setAttribute("name", "pizza[]");
+    newPizzaInput.value = pizzaName; 
+    newPizzaInput.style.display = "none"; 
+    $pizzaInput.appendChild(newPizzaInput);
+
     // update cart
     let $shoppingCart = document.getElementById('cart');
     // if shopping cart does not have this type of pizza
     if (document.getElementsByClassName(className).length === 0) {
         let newPizza = document.createElement('P');
+        console.log(className);
         newPizza.classList.add('pizza-in-cart', className);
         newPizza.setAttribute('data-quantity', 1);
         newPizza.setAttribute('data-name', pizzaName);

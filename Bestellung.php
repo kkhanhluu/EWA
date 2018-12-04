@@ -158,6 +158,50 @@ EOF;
     {
         parent::processReceivedData();
         // to do: call processReceivedData() for all members
+        // check parameters 
+        if (isset($_POST["name"]) && isset($_POST["strasse"]) && isset($_POST["Hausnummer"]) && isset($_POST["PLZ"]) && isset($_POST["Stadt"]) && isset($_POST["pizza"])) {
+            $name = $_POST["name"];
+            $street = $_POST["strasse"];
+            $hausnummer = $_POST["Hausnummer"];
+            $plz = $_POST["PLZ"];
+            $city = $_POST["Stadt"];
+            $pizzas = $_POST["pizza"];
+            
+            if (strlen($name) <= 0 || strlen($street) <= 0 || strlen($hausnummer) <= 0 || strlen($plz) <= 0 || strlen($city) <= 0) {
+                throw new Exception("Bitte geben Sie etwas an"); 
+            }
+            else {
+                $sqlName = $this->_database->real_escape_string($name);
+                $sqlStreet = $this->_database->real_escape_string($street);
+                $sqlHausnummer = $this->_database->real_escape_string($hausnummer); 
+                $sqlPlz = $this->_database->real_escape_string($plz); 
+                $sqlCity = $this->_database->real_escape_string($city); 
+                
+                // update Bestellung table
+                $sqlQuery = "SELECT * FROM bestellung WHERE ". "Name = \"$sqlName\"";
+                $recordSet = $this->_database->query($sqlQuery); 
+
+                if ($recordSet->num_rows > 0) {
+                    throw new Exception("Diese Bestellung ist bereits eingetragen"); 
+                    $recordSet->free(); 
+                }
+                else {
+                    $adress = $sqlStreet." ".$sqlHausnummer.", ".$sqlPlz.", ".$sqlCity;
+                    $sqlInsert = "INSERT INTO bestellung(Adresse, Name) VALUES('$adress', '$sqlName')"; 
+                    $this->_database->query($sqlInsert); 
+                    $newId = $this->_database->insert_id;
+                }
+
+                // update BestelltePizza table
+                foreach($pizzas as $pizza) {
+                    $sqlPizza = $this->_database->real_escape_string($pizza); 
+                    $sqlInsertPizza = "INSERT INTO bestelltepizza(fBestellungID, fPizzaName, Status) VALUES('$newId', '$sqlPizza', 0)"; 
+                    $this->_database->query($sqlInsertPizza); 
+                }
+            }
+        }
+
+
     }
 
     /**

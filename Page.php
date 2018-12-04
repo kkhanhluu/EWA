@@ -49,7 +49,20 @@ abstract class Page
      */
     protected function __construct() 
     {
-        $this->_database = null/* to do: create instance of class MySQLi */;
+        // activate full error checking
+        error_reporting(E_ALL); 
+
+        // open database
+        require_once 'pwd.php'; 
+        $this->_database = new MySQLi($host, $user, $pwd, "ewa"); 
+        // check connection to database
+        if (mysqli_connect_errno()) {
+            throw new Exception("Keine Verbindung zur Datenbank"); 
+        }
+        // set character encoding UTF-8 
+        if (!$this->_database->set_charset("utf8")) {
+            throw new Exception("Fehler beim Laden des Zeichensatzes UTF-8"); 
+        }
     }
     
     /**
@@ -59,6 +72,7 @@ abstract class Page
      */
     protected function __destruct()    
     {
+        $this->_database->close();
         // to do: close database
     }
     
