@@ -45,12 +45,15 @@ class Fahrer extends Page
      * @return none
      */
 
-    private $_fahrerform; 
+    private $_forms = array(); 
+    private $_selectedStatus;
+    private $selectedFormId; 
     protected function __construct() 
     {
         parent::__construct();
         // to do: instantiate members representing substructures/blocks
-        $this->_fahrerform = new FahrerForm($this->_database); 
+        $_selectedStatus = "xxx";
+        $selectedFormId = "xxx"; 
     }
     
     /**
@@ -74,6 +77,18 @@ class Fahrer extends Page
     protected function getViewData()
     {
         // to do: fetch data for this view from the database
+        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = 1"; 
+        $recordSet = $this->_database->query($sql); 
+        if (!$recordSet) {
+            throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 
+        }
+
+        $id = $recordSet->fetch_assoc();
+        while ($id) {
+            $this->_forms[] = new FahrerForm($this->_database, $id["PizzaID"]); 
+            $id = $recordSet->fetch_assoc(); 
+        }
+
     }
     
     protected function generatePageHeader($headline = "Bestellung") 
@@ -129,13 +144,15 @@ EOF;
             <h2>Fahrer</h2>
             <hr />
 EOF;
-        $this->_fahrerform->generateView('fahrer-form');
+        foreach($this->_forms as $form) {
+            $form->generateView();
+        }  
 
         echo <<<EOF
         </section>
         </div>
-EOF; 
-        $this->generatePageFooter();
+EOF;
+    $this->generatePageFooter();
     }
     
     /**
@@ -151,6 +168,23 @@ EOF;
     {
         parent::processReceivedData();
         // to do: call processReceivedData() for all members
+        foreach($this->_forms as $form) {
+            $form->processReceivedData($this->_selectedStatus, $this->selectedFormId);
+            $sqlStatus = $this->_database->real_escape_string($this->_selectedStatus);
+    
+            // query ordered pizza
+            $sqlQuery = "SELECT * FROM bestelltepizza WHERE PizzaID = ".$this->selectedFormId; 
+            $recordSet = $this->_database->query($sqlQuery); 
+            if ($recordSet->num_rows <= 0) {
+                throw new Exception("Bestellte pizza nicht vorhanden"); 
+                $recordSet->free();
+            }
+            else {
+                $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
+                var_dump($sqlUpdate);
+                $this->_database->query($sqlUpdate);
+            }
+        }
     }
 
     /**

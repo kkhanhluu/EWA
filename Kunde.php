@@ -45,12 +45,16 @@ class Kunde extends Page
      * @return none
      */
 
-    private $_kundeform; 
+    private $_forms = array(); 
+    private $_selectedStatus;
+    private $selectedFormId; 
     protected function __construct() 
     {
         parent::__construct();
         // to do: instantiate members representing substructures/blocks
-        $this->_kundeform = new KundeForm($this->_database); 
+        // $_forms = array(); 
+        $_selectedStatus = "xxx";
+        $selectedFormId = "xxx"; 
     }
     
     /**
@@ -74,6 +78,18 @@ class Kunde extends Page
     protected function getViewData()
     {
         // to do: fetch data for this view from the database
+        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = 1"; 
+        $recordSet = $this->_database->query($sql); 
+        if (!$recordSet) {
+            throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 
+        }
+
+        $id = $recordSet->fetch_assoc();
+        while ($id) {
+            $this->_forms[] = new KundeForm($this->_database, $id["PizzaID"]); 
+            $id = $recordSet->fetch_assoc(); 
+        }
+
     }
     
     protected function generatePageHeader($headline = "Bestellung") 
@@ -109,19 +125,19 @@ EOF;
         <div class="container">
         <ul class="topnav">
             <li>
-                <a href="Uebersicht.html">Übersicht</a>
+                <a href="Uebersicht.php">Übersicht</a>
             </li>
             <li>
-                <a href="Bestellung.html">Bestellung</a>
+                <a href="Bestellung.php">Bestellung</a>
             </li>
             <li>
-                <a href="Kunde.html">Kunde</a>
+                <a href="Kunde.php">Kunde</a>
             </li>
             <li>
-                <a href="Baecker.html">Bäcker</a>
+                <a href="Baecker.php">Bäcker</a>
             </li>
             <li>
-                <a href="Fahrer.html">Fahrer</a>
+                <a href="Fahrer.php">Fahrer</a>
             </li>
         </ul>
         <section>
@@ -129,7 +145,9 @@ EOF;
             <hr>
 EOF;
 
-        $this->_kundeform->generateView('kunde-form');
+        foreach($this->_forms as $form) {
+            $form->generateView();
+        }        
 
         echo <<<EOF
         </section>
@@ -151,6 +169,23 @@ EOF;
     {
         parent::processReceivedData();
         // to do: call processReceivedData() for all members
+        foreach($this->_forms as $form) {
+            $form->processReceivedData($this->_selectedStatus, $this->selectedFormId);
+            $sqlStatus = $this->_database->real_escape_string($this->_selectedStatus);
+    
+            // query ordered pizza
+            $sqlQuery = "SELECT * FROM bestelltepizza WHERE PizzaID = ".$this->selectedFormId; 
+            $recordSet = $this->_database->query($sqlQuery); 
+            if ($recordSet->num_rows <= 0) {
+                throw new Exception("Bestellte pizza nicht vorhanden"); 
+                $recordSet->free();
+            }
+            else {
+                $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
+                var_dump($sqlUpdate);
+                $this->_database->query($sqlUpdate);
+            }
+        }
     }
 
     /**

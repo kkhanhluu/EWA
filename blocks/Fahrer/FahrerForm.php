@@ -36,7 +36,7 @@ class FahrerForm          // to do: change name of class
      * accessed by all operations of the class.
      */
     protected $_database = null;
-    
+    protected $_id = -1;
     // to do: declare reference variables for members 
     // representing substructures/blocks
     
@@ -50,9 +50,10 @@ class FahrerForm          // to do: change name of class
      *
      * @return none
      */
-    public function __construct($database) 
+    public function __construct($database, $id) 
     {
         $this->_database = $database;
+        $this->_id = $id; 
         // to do: instantiate members representing substructures/blocks
     }
 
@@ -65,8 +66,38 @@ class FahrerForm          // to do: change name of class
     protected function getViewData()
     {
         // to do: fetch data for this view from the database
+        $sql = "SELECT * FROM bestelltepizza WHERE PizzaID = ".$this->_id;
+        $recordSet = $this->_database->query($sql); 
+
+        if (!$recordSet) {
+            throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 
+        }
+
+        $bestelltePizza = $recordSet->fetch_assoc();
+        return $bestelltePizza; 
     }
     
+    private function insertInput($status, $value) {
+        $intValue= -1; 
+        switch($value) {
+            case "Fertig": 
+                $intValue = 2;
+                break;
+            case "Unterwegs": 
+                $intValue = 3;
+                break;
+            case "Geliefert": 
+                $intValue = 4;
+                break;  
+        }
+        if ($intValue == $status) {
+            echo("<label><input checked=\"checked\" onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");
+        }
+        else {
+            echo("<label><input onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");            
+        }
+    }
+
     /**
      * Generates an HTML block embraced by a div-tag with the submitted id.
      * If the block contains other blocks, delegate the generation of their 
@@ -78,25 +109,27 @@ class FahrerForm          // to do: change name of class
      */
     public function generateView($id = "fahrer-form") 
     {
-        $this->getViewData();
+        $bestelltePizza = $this->getViewData();
         if ($id) {
             $id = "id=\"$id\"";
         }
-        echo "<div class=\"div-driver\" $id>\n";
-        // to do: call generateView() for all members
-        echo <<<EOF
-        <form class="form-status-driver" id="form1" action="https://wwwold.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="POST">
-            <fieldset>
-                <legend>Bestellung 91</legend>
-                <div class="div-input">
-                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="fertig">Fertig</input>
-                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="unterwegs">Unterwegs</input>
-                    <input type="radio" onclick="document.forms['form1'].submit(); " name="driver" value="geliefert">Geliefert</input>
-                </div>
+        echo "<div class=\"div-driver\">\n";
+        echo "<form class=\"form-status-input\" id=\"form-$this->_id\" action=\"Kunde.php\" accept-charset=\"UTF-8\" method=\"POST\">\n";
+        echo <<<EOT
+        <fieldset>
+<legend>Fahrer</legend>
+<div class="div-input">
+EOT;
+// var_dump($pizza);
+            $this->insertInput($bestelltePizza["Status"], "Fertig");
+            $this->insertInput($bestelltePizza["Status"], "Unterwegs");
+            $this->insertInput($bestelltePizza["Status"], "Geliefert");
+            echo <<<EOT
+            </div>
             </fieldset>
-        </form>
-EOF;
-        echo "</div>\n";
+            </form>
+EOT;
+            echo "</div>\n";
     }
     
     /**
@@ -108,9 +141,13 @@ EOF;
      *
      * @return none 
      */
-    public function processReceivedData()
+    public function processReceivedData(&$status, &$formId)
     {
         // to do: call processData() for all members
+        if(isset($_POST["status"])) {
+            $status = $_POST["status"];
+            $formId = $this->_id;
+        }
     }
 }
 // Zend standard does not like closing php-tag!
