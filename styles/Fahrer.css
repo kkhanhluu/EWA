@@ -12,7 +12,9 @@ h2 {
 label {
     display: inline-block;
 }
-
+.adress {
+    text-align: center;
+}
 @media screen and (max-width: 700px) {
     .form-status-driver {
         flex-direction: column; 

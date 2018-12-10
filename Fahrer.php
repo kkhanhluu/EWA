@@ -48,12 +48,14 @@ class Fahrer extends Page
     private $_forms = array(); 
     private $_selectedStatus;
     private $selectedFormId; 
+    private $_adress;
     protected function __construct() 
     {
         parent::__construct();
         // to do: instantiate members representing substructures/blocks
         $_selectedStatus = "xxx";
         $selectedFormId = -1; 
+        $_adress = "xxx";
     }
     
     /**
@@ -89,6 +91,13 @@ class Fahrer extends Page
             $id = $recordSet->fetch_assoc(); 
         }
 
+        $sqlAdress = "SELECT Adresse FROM bestellung WHERE BestellungID = 2"; 
+        $recordSetAdress = $this->_database->query($sqlAdress); 
+        if (!$recordSetAdress) {
+            throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 
+        }
+
+        $this->_adress = htmlspecialchars($recordSetAdress->fetch_assoc()["Adresse"]);
     }
     
     protected function generatePageHeader($headline = "Bestellung") 
@@ -145,6 +154,7 @@ EOF;
             <h2>Fahrer</h2>
             <hr />
 EOF;
+        echo "<p class=\"adress\">$this->_adress</p>";
         foreach($this->_forms as $form) {
             $form->generateView();
         }  
