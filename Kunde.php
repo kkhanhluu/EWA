@@ -47,14 +47,14 @@ class Kunde extends Page
 
     private $_forms = array(); 
     private $_selectedStatus;
-    private $selectedFormId; 
+    private  $selectedFormId; 
     protected function __construct() 
     {
         parent::__construct();
         // to do: instantiate members representing substructures/blocks
         // $_forms = array(); 
         $_selectedStatus = "xxx";
-        $selectedFormId = "xxx"; 
+        $selectedFormId = -1; 
     }
     
     /**
@@ -103,6 +103,8 @@ class Kunde extends Page
             <title>Kunde</title>
             <link rel="stylesheet" href="styles/KundeStyle.css">
             <link rel="stylesheet" href="styles/index.css" />
+            <!-- scripts -->
+            <script type="text/javascript" src="scripts/form.js"></script>
         </head>
 EOF;
     }
@@ -118,7 +120,6 @@ EOF;
      */
     protected function generateView() 
     {
-        $this->getViewData();
         $this->generatePageHeader('Kunde');
 
         echo<<<EOF
@@ -168,23 +169,16 @@ EOF;
     protected function processReceivedData() 
     {
         parent::processReceivedData();
+        $this->getViewData();
+        
         // to do: call processReceivedData() for all members
         foreach($this->_forms as $form) {
             $form->processReceivedData($this->_selectedStatus, $this->selectedFormId);
             $sqlStatus = $this->_database->real_escape_string($this->_selectedStatus);
     
             // query ordered pizza
-            $sqlQuery = "SELECT * FROM bestelltepizza WHERE PizzaID = ".$this->selectedFormId; 
-            $recordSet = $this->_database->query($sqlQuery); 
-            if ($recordSet->num_rows <= 0) {
-                throw new Exception("Bestellte pizza nicht vorhanden"); 
-                $recordSet->free();
-            }
-            else {
-                $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
-                var_dump($sqlUpdate);
-                $this->_database->query($sqlUpdate);
-            }
+            $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
+            $this->_database->query($sqlUpdate);
         }
     }
 
@@ -205,7 +199,7 @@ EOF;
         try {
             $page = new Kunde();
             $page->processReceivedData();
-            $page->generateView();
+            $page->generateView ();
         }
         catch (Exception $e) {
             header("Content-type: text/plain; charset=UTF-8");

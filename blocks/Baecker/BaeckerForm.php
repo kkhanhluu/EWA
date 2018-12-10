@@ -91,10 +91,10 @@ class BaeckerForm          // to do: change name of class
                 break;
         }
         if ($intValue == $status) {
-            echo("<label><input checked=\"checked\" onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");
+            echo("<label><input checked=\"checked\" onclick=\"changeStatus('hide-$this->_id');document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");
         }
         else {
-            echo("<label><input onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");            
+            echo("<label><input onclick=\"changeStatus('hide-$this->_id');document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");            
         }
     }
     
@@ -114,7 +114,7 @@ class BaeckerForm          // to do: change name of class
             $id = "id=\"$id\"";
         }
         echo "<div class=\"div-pizza-order\">\n";
-        echo "<form class=\"form-status-order\" id=\"form-$this->_id\" action=\"Kunde.php\" accept-charset=\"UTF-8\" method=\"POST\">\n";
+        echo "<form class=\"form-status-order\" id=\"form-$this->_id\" action=\"Baecker.php\" accept-charset=\"UTF-8\" method=\"POST\">\n";
         echo <<<EOT
 <fieldset>
 <legend>Kunde</legend>
@@ -123,7 +123,7 @@ EOT;
             // var_dump($pizza);
             $this->insertInput($bestelltePizza["Status"], "Bestellt");
             $this->insertInput($bestelltePizza["Status"], "ImOfen");
-            $this->insertInput($bestelltePizza["Status"], "Fertig");
+            $this->insertInput($bestelltePizza["Status"], "Fertig");echo("<input id=\"hide-$this->_id\" type=\"text\" name=\"isSubmitted-$this->_id\" value=\"false\" hidden />");
             echo <<<EOT
 </div>
 </fieldset>
@@ -144,9 +144,11 @@ EOT;
     public function processReceivedData(&$status, &$formId)
     {
         // to do: call processData() for all members
-        if(isset($_POST["status"])) {
-            $status = $_POST["status"];
-            $formId = $this->_id;
+        if(isset($_POST["status"]) && isset($_POST["isSubmitted-$this->_id"])) {
+            if ($_POST["isSubmitted-$this->_id"] == "true") {
+                $status = $_POST["status"];
+                $formId = $this->_id;
+            }
         }
     }
 }

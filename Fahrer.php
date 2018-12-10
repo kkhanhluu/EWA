@@ -53,7 +53,7 @@ class Fahrer extends Page
         parent::__construct();
         // to do: instantiate members representing substructures/blocks
         $_selectedStatus = "xxx";
-        $selectedFormId = "xxx"; 
+        $selectedFormId = -1; 
     }
     
     /**
@@ -102,6 +102,8 @@ class Fahrer extends Page
             <link rel="stylesheet" href="styles/Fahrer.css" />
             <link rel="stylesheet" href="styles/index.css" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- scripts -->
+            <script type="text/javascript" src="scripts/form.js"></script>
             <title>Fahrer</title>
         </head>
 EOF;
@@ -118,7 +120,6 @@ EOF;
      */
     protected function generateView() 
     {
-        $this->getViewData();
         $this->generatePageHeader('Fahrer');
 
         echo<<<EOF
@@ -152,7 +153,7 @@ EOF;
         </section>
         </div>
 EOF;
-    $this->generatePageFooter();
+        $this->generatePageFooter();
     }
     
     /**
@@ -167,23 +168,16 @@ EOF;
     protected function processReceivedData() 
     {
         parent::processReceivedData();
+        $this->getViewData();
+        
         // to do: call processReceivedData() for all members
         foreach($this->_forms as $form) {
             $form->processReceivedData($this->_selectedStatus, $this->selectedFormId);
             $sqlStatus = $this->_database->real_escape_string($this->_selectedStatus);
     
             // query ordered pizza
-            $sqlQuery = "SELECT * FROM bestelltepizza WHERE PizzaID = ".$this->selectedFormId; 
-            $recordSet = $this->_database->query($sqlQuery); 
-            if ($recordSet->num_rows <= 0) {
-                throw new Exception("Bestellte pizza nicht vorhanden"); 
-                $recordSet->free();
-            }
-            else {
-                $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
-                var_dump($sqlUpdate);
-                $this->_database->query($sqlUpdate);
-            }
+            $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
+            $this->_database->query($sqlUpdate);
         }
     }
 
@@ -198,7 +192,7 @@ EOF;
      * call it without first creating an instance of the class.
      *
      * @return none 
-     */    
+     */
     public static function main() 
     {
         try {

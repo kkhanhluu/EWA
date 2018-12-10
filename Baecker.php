@@ -101,6 +101,8 @@ class Baecker extends Page
             <link rel="stylesheet" href="styles/BaeckerStyle.css" />
             <link rel="stylesheet" href="styles/index.css" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- scripts -->
+            <script type="text/javascript" src="scripts/form.js"></script>
             <title>Bäcker</title>
         </head>
 EOF;
@@ -117,7 +119,6 @@ EOF;
      */
     protected function generateView() 
     {
-        $this->getViewData();
         $this->generatePageHeader('Baecker');
         echo <<<EOF
         <div class="container">
@@ -165,23 +166,16 @@ EOF;
     protected function processReceivedData() 
     {
         parent::processReceivedData();
+        $this->getViewData();
+        
         // to do: call processReceivedData() for all members
         foreach($this->_forms as $form) {
             $form->processReceivedData($this->_selectedStatus, $this->selectedFormId);
             $sqlStatus = $this->_database->real_escape_string($this->_selectedStatus);
     
             // query ordered pizza
-            $sqlQuery = "SELECT * FROM bestelltepizza WHERE PizzaID = ".$this->selectedFormId; 
-            $recordSet = $this->_database->query($sqlQuery); 
-            if ($recordSet->num_rows <= 0) {
-                throw new Exception("Bestellte pizza nicht vorhanden"); 
-                $recordSet->free();
-            }
-            else {
-                $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
-                var_dump($sqlUpdate);
-                $this->_database->query($sqlUpdate);
-            }
+            $sqlUpdate = "UPDATE bestelltepizza SET Status = ".$this->_selectedStatus." WHERE PizzaID = ".$this->selectedFormId; 
+            $this->_database->query($sqlUpdate);
         }
     }
 

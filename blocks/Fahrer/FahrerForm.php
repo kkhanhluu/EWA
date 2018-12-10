@@ -91,13 +91,12 @@ class FahrerForm          // to do: change name of class
                 break;  
         }
         if ($intValue == $status) {
-            echo("<label><input checked=\"checked\" onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");
+            echo("<label><input checked=\"checked\" onclick=\"changeStatus('hide-$this->_id');document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");
         }
         else {
-            echo("<label><input onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");            
+            echo("<label><input onclick=\"changeStatus('hide-$this->_id');document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");            
         }
     }
-
     /**
      * Generates an HTML block embraced by a div-tag with the submitted id.
      * If the block contains other blocks, delegate the generation of their 
@@ -114,7 +113,7 @@ class FahrerForm          // to do: change name of class
             $id = "id=\"$id\"";
         }
         echo "<div class=\"div-driver\">\n";
-        echo "<form class=\"form-status-input\" id=\"form-$this->_id\" action=\"Kunde.php\" accept-charset=\"UTF-8\" method=\"POST\">\n";
+        echo "<form class=\"form-status-input\" id=\"form-$this->_id\" action=\"Fahrer.php\" accept-charset=\"UTF-8\" method=\"POST\">\n";
         echo <<<EOT
         <fieldset>
 <legend>Fahrer</legend>
@@ -124,6 +123,7 @@ EOT;
             $this->insertInput($bestelltePizza["Status"], "Fertig");
             $this->insertInput($bestelltePizza["Status"], "Unterwegs");
             $this->insertInput($bestelltePizza["Status"], "Geliefert");
+            echo("<input id=\"hide-$this->_id\" type=\"text\" name=\"isSubmitted-$this->_id\" value=\"false\" hidden />");            
             echo <<<EOT
             </div>
             </fieldset>
@@ -144,9 +144,11 @@ EOT;
     public function processReceivedData(&$status, &$formId)
     {
         // to do: call processData() for all members
-        if(isset($_POST["status"])) {
-            $status = $_POST["status"];
-            $formId = $this->_id;
+        if(isset($_POST["status"]) && isset($_POST["isSubmitted-$this->_id"])) {
+            if ($_POST["isSubmitted-$this->_id"] == "true") {
+                $status = $_POST["status"];
+                $formId = $this->_id;
+            }
         }
     }
 }

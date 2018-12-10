@@ -26,7 +26,6 @@
  * @author   Bernhard Kreling, <b.kreling@fbi.h-da.de> 
  * @author   Ralf Hahn, <ralf.hahn@h-da.de> 
 */
- 
 class KundeForm          // to do: change name of class
 {
     // --- ATTRIBUTES ---
@@ -97,10 +96,10 @@ class KundeForm          // to do: change name of class
                 break;  
         }
         if ($intValue == $status) {
-            echo("<label><input checked=\"checked\" onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");
+            echo("<label><input checked=\"checked\" onclick=\"changeStatus('hide-$this->_id');document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");
         }
         else {
-            echo("<label><input onclick=\"document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");            
+            echo("<label><input onclick=\"changeStatus('hide-$this->_id');document.forms['form-$this->_id']. submit();\" type=\"radio\" name=\"status\" value=\"$intValue\">$value</label>");            
         }
     }
     
@@ -133,11 +132,13 @@ EOT;
             $this->insertInput($bestelltePizza["Status"], "Fertig");
             $this->insertInput($bestelltePizza["Status"], "Unterwegs");
             $this->insertInput($bestelltePizza["Status"], "Geliefert");
+            echo("<input id=\"hide-$this->_id\" type=\"text\" name=\"isSubmitted-$this->_id\" value=\"false\" hidden />");
             echo <<<EOT
 </div>
 </fieldset>
 </form>
 EOT;
+            echo "</div>";
     }
     
     
@@ -153,9 +154,11 @@ EOT;
     public function processReceivedData(&$status, &$formId)
     {
         // to do: call processData() for all members
-        if(isset($_POST["status"])) {
-            $status = $_POST["status"];
-            $formId = $this->_id;
+        if(isset($_POST["status"]) && isset($_POST["isSubmitted-$this->_id"])) {
+            if ($_POST["isSubmitted-$this->_id"] == "true") {
+                $status = $_POST["status"];
+                $formId = $this->_id;
+            }
         }
     }
 }
