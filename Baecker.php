@@ -32,6 +32,10 @@ require_once './blocks/Baecker/BaeckerForm.php';
  * @author   Bernhard Kreling, <b.kreling@fbi.h-da.de> 
  * @author   Ralf Hahn, <ralf.hahn@h-da.de> 
  */
+
+ // start session 
+ session_start(); 
+
 class Baecker extends Page
 {
     // to do: declare reference variables for members 
@@ -76,8 +80,16 @@ class Baecker extends Page
      */
     protected function getViewData()
     {
+        // get bestellungID from session
+        $bestellungID = 0;
+        if (isset($_SESSION["BestellungID"])) {
+            $bestellungID = $_SESSION["BestellungID"];
+        }
+
         // to do: fetch data for this view from the database
-        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = 1"; 
+        
+        // query PizzaID from bestelltepizza table 
+        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = ".$bestellungID; 
         $recordSet = $this->_database->query($sql); 
         if (!$recordSet) {
             throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 

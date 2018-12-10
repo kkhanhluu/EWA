@@ -32,6 +32,10 @@ require_once './blocks/Fahrer/FahrerForm.php';
  * @author   Bernhard Kreling, <b.kreling@fbi.h-da.de> 
  * @author   Ralf Hahn, <ralf.hahn@h-da.de> 
  */
+
+ // start session 
+ session_start(); 
+
 class Fahrer extends Page
 {
     // to do: declare reference variables for members 
@@ -78,25 +82,32 @@ class Fahrer extends Page
      */
     protected function getViewData()
     {
+        // get bestellungID from session
+        $bestellungID = 0;
+        if (isset($_SESSION["BestellungID"])) {
+            $bestellungID = $_SESSION["BestellungID"];
+        }
+
         // to do: fetch data for this view from the database
-        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = 1"; 
+
+        // query bestellung's bestellte pizza
+        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = ".$bestellungID; 
         $recordSet = $this->_database->query($sql); 
         if (!$recordSet) {
             throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 
         }
-
         $id = $recordSet->fetch_assoc();
         while ($id) {
             $this->_forms[] = new FahrerForm($this->_database, $id["PizzaID"]); 
             $id = $recordSet->fetch_assoc(); 
         }
 
-        $sqlAdress = "SELECT Adresse FROM bestellung WHERE BestellungID = 2"; 
+        // query bestellung's adress
+        $sqlAdress = "SELECT Adresse FROM bestellung WHERE BestellungID = ".$bestellungID; 
         $recordSetAdress = $this->_database->query($sqlAdress); 
         if (!$recordSetAdress) {
             throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 
         }
-
         $this->_adress = htmlspecialchars($recordSetAdress->fetch_assoc()["Adresse"]);
     }
     

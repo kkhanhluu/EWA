@@ -32,6 +32,10 @@ require_once './blocks/Kunde/KundeForm.php';
  * @author   Bernhard Kreling, <b.kreling@fbi.h-da.de> 
  * @author   Ralf Hahn, <ralf.hahn@h-da.de> 
  */
+
+ // start session 
+session_start();
+
 class Kunde extends Page
 {
     // to do: declare reference variables for members 
@@ -76,9 +80,15 @@ class Kunde extends Page
      * @return none
      */
     protected function getViewData()
-    {
+    { 
+        // get BestellungId from session
+        $bestellungID = 0;
+        if (isset($_SESSION["BestellungID"])) {
+            $bestellungID = $_SESSION["BestellungID"];
+        }
+        
         // to do: fetch data for this view from the database
-        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = 1"; 
+        $sql = "SELECT PizzaID FROM bestelltePizza WHERE fBestellungID = ".$bestellungID; 
         $recordSet = $this->_database->query($sql); 
         if (!$recordSet) {
             throw new Exception("Abfrage fehlgeschlagen ".$this->_database->error); 

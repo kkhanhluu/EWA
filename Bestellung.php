@@ -33,6 +33,9 @@ require_once './blocks/Bestellung/RightDiv.php';
  * @author   Bernhard Kreling, <b.kreling@fbi.h-da.de> 
  * @author   Ralf Hahn, <ralf.hahn@h-da.de> 
  */
+// start session 
+session_start();
+
 class Bestellung extends Page
 {
     // to do: declare reference variables for members 
@@ -112,7 +115,6 @@ EOF;
     {
         $this->getViewData();
         $this->generatePageHeader('Bestellung');
-
         echo <<<EOF
         <div class="container">
         <ul class="topnav">
@@ -176,21 +178,16 @@ EOF;
                 $sqlHausnummer = $this->_database->real_escape_string($hausnummer); 
                 $sqlPlz = $this->_database->real_escape_string($plz); 
                 $sqlCity = $this->_database->real_escape_string($city); 
+               
+                //update Bestellung table
+                $adress = $sqlStreet." ".$sqlHausnummer.", ".$sqlPlz.", ".$sqlCity;
+                $sqlInsert = "INSERT INTO bestellung(Adresse, Name) VALUES('$adress', '$sqlName')"; 
+                $this->_database->query($sqlInsert);
+                // return bestellung id 
+                $newId = $this->_database->insert_id;
                 
-                // update Bestellung table
-                $sqlQuery = "SELECT * FROM bestellung WHERE ". "Name = \"$sqlName\"";
-                $recordSet = $this->_database->query($sqlQuery); 
-
-                if ($recordSet->num_rows > 0) {
-                    throw new Exception("Diese Bestellung ist bereits eingetragen"); 
-                    $recordSet->free(); 
-                }
-                else {
-                    $adress = $sqlStreet." ".$sqlHausnummer.", ".$sqlPlz.", ".$sqlCity;
-                    $sqlInsert = "INSERT INTO bestellung(Adresse, Name) VALUES('$adress', '$sqlName')"; 
-                    $this->_database->query($sqlInsert); 
-                    $newId = $this->_database->insert_id;
-                }
+                // add Session Id 
+                $_SESSION["BestellungID"] = $newId; 
 
                 // update BestelltePizza table
                 foreach($pizzas as $pizza) {
@@ -198,6 +195,8 @@ EOF;
                     $sqlInsertPizza = "INSERT INTO bestelltepizza(fBestellungID, fPizzaName, Status) VALUES('$newId', '$sqlPizza', 0)"; 
                     $this->_database->query($sqlInsertPizza); 
                 }
+
+                
             }
         }
 
