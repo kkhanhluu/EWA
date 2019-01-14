@@ -64,6 +64,7 @@ function eventListenerForPizzaImage(event) {
     let $pizzaInput = document.getElementById("customer"); 
     let newPizzaInput = document.createElement("input"); 
     newPizzaInput.setAttribute("name", "pizza[]");
+    newPizzaInput.setAttribute("data-pizza-name", pizzaName);
     newPizzaInput.value = pizzaName; 
     newPizzaInput.style.display = "none"; 
     $pizzaInput.appendChild(newPizzaInput);
@@ -101,7 +102,9 @@ function eventListenerForButtonPizzaDelete(event) {
     let deletedPizza = document.getElementsByClassName('selected');
     
     while (deletedPizza.length > 0) {
+        let pizzaName = deletedPizza[0].getAttribute("data-name");
         price -= parseFloat(deletedPizza[0].getAttribute('data-price'));
+        // update price
         if (deletedPizza[0].getAttribute('data-quantity') === '1') {
             deletedPizza[0].parentNode.removeChild(deletedPizza[0]);
         }
@@ -111,6 +114,9 @@ function eventListenerForButtonPizzaDelete(event) {
             deletedPizza[0].setAttribute('data-quantity', quantity); 
             deletedPizza[0].classList.remove('selected');
         }
+        // update input pizza
+        let inputPizza = document.querySelectorAll('[data-pizza-name="' + pizzaName + '"]')[0];
+        inputPizza.parentNode.removeChild(inputPizza);
     }
     document.getElementById('total-price').innerHTML = price;
 }

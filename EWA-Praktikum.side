@@ -1,0 +1,151 @@
+{
+  "id": "a13be60c-beb5-4d48-8d41-d1721d6e73b0",
+  "version": "1.1",
+  "name": "EWA-Praktikum",
+  "url": "http://127.0.0.1:82",
+  "tests": [{
+    "id": "94a7324e-e92a-4b80-8a2f-bec7c0230df3",
+    "name": "Test 1",
+    "commands": [{
+      "id": "19642e52-91fa-496c-baec-1b581695157f",
+      "comment": "",
+      "command": "open",
+      "target": "/EWA-Praktikum/Bestellung.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cff3df1c-3598-4847-874e-99af2318080a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1280x688",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a2d42d9-cf1c-44b9-bdae-fc56a25e3371",
+      "comment": "",
+      "command": "click",
+      "target": "id=div-cart",
+      "targets": [
+        ["id=div-cart", "id"],
+        ["css=#div-cart", "css"],
+        ["css=#div-cart", "css:finder"],
+        ["xpath=//div[@id='div-cart']", "xpath:attributes"],
+        ["xpath=//div[@id='right-side-div']/div", "xpath:idRelative"],
+        ["xpath=//section/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a890645d-ee8c-4c13-9ec1-3b908cbef33a",
+      "comment": "",
+      "command": "click",
+      "target": "css=img.pizzaImage",
+      "targets": [
+        ["css=img.pizzaImage", "css"],
+        ["css=.pizza:nth-child(1) .pizzaImage", "css:finder"],
+        ["xpath=//img[@alt='Pizza Casanova']", "xpath:img"],
+        ["xpath=//div[@id='pizzen']/div/div/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "926c2167-9c02-40b3-8a14-af1dffbcef10",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pizza:nth-child(2) .pizzaImage",
+      "targets": [
+        ["css=.pizza:nth-child(2) .pizzaImage", "css:finder"],
+        ["xpath=//img[@alt='Pizza Hawaii']", "xpath:img"],
+        ["xpath=//div[@id='pizzen']/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d69063be-8710-4d0e-9c39-e8b49cea8c5f",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=total-price",
+      "targets": [
+        ["id=total-price", "id"],
+        ["css=#total-price", "css"],
+        ["css=#total-price", "css:finder"],
+        ["xpath=//span[@id='total-price']", "xpath:attributes"],
+        ["xpath=//div[@id='totalPrice']/p/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": "10.5"
+    }, {
+      "id": "8f561cfd-7e18-469b-931a-56f16aca3b8e",
+      "comment": "",
+      "command": "click",
+      "target": "css=#totalPrice > p",
+      "targets": [
+        ["css=#totalPrice > p", "css"],
+        ["css=#totalPrice > p", "css:finder"],
+        ["xpath=//div[@id='totalPrice']/p", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/p", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9621a6e7-54b2-4cc4-977a-8a66337a3214",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pizza:nth-child(2) .pizzaImage",
+      "targets": [
+        ["css=.pizza:nth-child(2) .pizzaImage", "css:finder"],
+        ["xpath=//img[@alt='Pizza Hawaii']", "xpath:img"],
+        ["xpath=//div[@id='pizzen']/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f49a7905-34a0-4344-a73d-55f036ef1d8d",
+      "comment": "",
+      "command": "click",
+      "target": "css=img.pizzaImage",
+      "targets": [
+        ["css=img.pizzaImage", "css"],
+        ["css=.pizza:nth-child(1) .pizzaImage", "css:finder"],
+        ["xpath=//img[@alt='Pizza Casanova']", "xpath:img"],
+        ["xpath=//div[@id='pizzen']/div/div/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "98fd9603-cf39-45d7-b99d-b149a201e2ab",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pizza:nth-child(3) .pizzaImage",
+      "targets": [
+        ["css=.pizza:nth-child(3) .pizzaImage", "css:finder"],
+        ["xpath=//img[@alt='Pizza Margherita']", "xpath:img"],
+        ["xpath=//div[@id='pizzen']/div[3]/div/img", "xpath:idRelative"],
+        ["xpath=//div[3]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d589cab-056a-4b2c-80ec-3861ca1a91dd",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=total-price",
+      "targets": [
+        ["id=total-price", "id"],
+        ["css=#total-price", "css"],
+        ["css=#total-price", "css:finder"],
+        ["xpath=//span[@id='total-price']", "xpath:attributes"],
+        ["xpath=//div[@id='totalPrice']/p/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": "25"
+    }]
+  }],
+  "suites": [{
+    "id": "e1568c72-c9ef-48d8-9ec8-920d72d0d5e6",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["94a7324e-e92a-4b80-8a2f-bec7c0230df3"]
+  }],
+  "urls": ["http://127.0.0.1:82/"],
+  "plugins": []
+}
